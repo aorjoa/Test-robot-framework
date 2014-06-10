@@ -1,0 +1,9 @@
+*** Settings ***
+Library  Selenium2Library
+
+*** Test Cases ***
+Test open browser
+    Open Browser  http://localhost:7272/index.html
+    Input Text  number  1
+    Click Button  ok
+    Page Should Contain  1

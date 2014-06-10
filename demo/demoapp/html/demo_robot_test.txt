@@ -1,0 +1,34 @@
+*** Settings ***
+Library         Selenium2Library
+Suite Teardown  Close All Browsers
+
+*** Variables ***
+${LOGIN PAGE}  http://127.0.0.1:7272/html/
+
+
+*** Testcases ***
+Rule for invalid login
+    [Template]  Flow for invalid login
+    #---------------------#
+    # username | password #
+    #---------------------#
+        dome      mode
+        demo      medo
+        demo      mode
+
+*** Keywords ***
+Flow for invalid login
+    [Arguments]  ${username}  ${password}
+    Open Login Page
+    Login  ${username}  ${password}
+    Page Should Contain  Login failed
+
+Open Login Page
+    Open Browser  ${LOGIN PAGE}
+    Title Should Be  Login Page
+
+Login 
+    [Arguments]  ${username}  ${password}
+    Input Text  username_field  ${username}
+    Input Text  password_field  ${password}
+    Click Button  login_button
